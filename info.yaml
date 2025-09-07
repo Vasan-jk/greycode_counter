@@ -2,20 +2,23 @@
 project:
   title:        "8-bit Gray Code Counter"
   author:       "Your Name"
-  discord:      "yourdiscord#1234"
-  description:  "Outputs an 8-bit Gray code sequence on LEDs"
+  discord:      ""      # optional
+  description:  "Generates an 8-bit Gray code sequence on uo[7:0]"
   language:     "Verilog"
   clock_hz:     0
 
   tiles: "1x1"
 
-  top_module:  "gray counter"
+  # Top module name must start with tt_um_
+  top_module:  "tt_um_gray_counter"
 
+  # Your Verilog source file(s) inside ./src
   source_files:
     - "project.v"
 
+# Pinout description
 pinout:
-  # Inputs
+  # Inputs (unused in this design)
   ui[0]: ""
   ui[1]: ""
   ui[2]: ""
@@ -25,7 +28,7 @@ pinout:
   ui[6]: ""
   ui[7]: ""
 
-  # Outputs
+  # Outputs (Gray code counter bits)
   uo[0]: "Gray[0]"
   uo[1]: "Gray[1]"
   uo[2]: "Gray[2]"
@@ -35,7 +38,7 @@ pinout:
   uo[6]: "Gray[6]"
   uo[7]: "Gray[7]"
 
-  # Bidirectional pins
+  # Bidirectional pins (not used)
   uio[0]: ""
   uio[1]: ""
   uio[2]: ""
@@ -45,4 +48,5 @@ pinout:
   uio[6]: ""
   uio[7]: ""
 
+# Do not change!
 yaml_version: 6
