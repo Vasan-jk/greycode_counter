@@ -29,7 +29,7 @@ endmodule
 
 // gray_counter.v
 // Fixed 8-bit Gray Code Counter
-
+/*
 module gray_counter (
     input  wire       clk,    // clock
     input  wire       rst_n,  // active-low reset
@@ -47,6 +47,39 @@ module gray_counter (
             gray   <= binary ^ (binary >> 1); // convert to Gray code
         end
     end
+
+endmodule
+*/
+// 8-bit Gray Code Counter for TinyTapeout
+module tt_um_gray_counter (
+    input  wire [7:0] ui_in,    // unused user inputs
+    output wire [7:0] uo_out,   // Gray code output
+    input  wire [7:0] uio_in,   // unused bidirectional inputs
+    output wire [7:0] uio_out,  // unused bidirectional outputs
+    output wire [7:0] uio_oe,   // unused output enables
+    input  wire       clk,      // global clock
+    input  wire       rst_n     // global reset (active low)
+);
+
+    reg [7:0] binary;
+    reg [7:0] gray;
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            binary <= 8'b0;
+            gray   <= 8'b0;
+        end else begin
+            binary <= binary + 1'b1;
+            gray   <= binary ^ (binary >> 1);
+        end
+    end
+
+    // Drive outputs
+    assign uo_out  = gray;
+
+    // Not using bidirectional IOs
+    assign uio_out = 8'b0;
+    assign uio_oe  = 8'b0;
 
 endmodule
 
