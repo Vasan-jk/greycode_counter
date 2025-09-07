@@ -4,7 +4,7 @@
  */
 
 `default_nettype none
-
+/*
 module tt_um_example (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
@@ -25,3 +25,28 @@ module tt_um_example (
   wire _unused = &{ena, clk, rst_n, 1'b0};
 
 endmodule
+*/
+
+// gray_counter.v
+// Fixed 8-bit Gray Code Counter
+
+module gray_counter (
+    input  wire       clk,    // clock
+    input  wire       rst_n,  // active-low reset
+    output reg [7:0]  gray    // Gray code output
+);
+
+    reg [7:0] binary;  // internal binary counter
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            binary <= 8'd0;
+            gray   <= 8'd0;
+        end else begin
+            binary <= binary + 1'b1;          // increment binary counter
+            gray   <= binary ^ (binary >> 1); // convert to Gray code
+        end
+    end
+
+endmodule
+
